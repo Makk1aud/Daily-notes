@@ -12,6 +12,11 @@ namespace DayliNotesWebMVC.Controllers
             _logger = logger;
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
