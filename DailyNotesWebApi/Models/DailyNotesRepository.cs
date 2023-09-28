@@ -41,13 +41,21 @@ namespace DailyNotesWebApi.Models
             var not = await _context.Notes.FirstOrDefaultAsync(x => x.NoteId == note.NoteId);
             if (not != null)
             {
-                not.ClientId = client.ClientId;
-                not.Login = client.Login;
-                not.Password = client.Password;
-                not.Email = client.Email;
-                not.GenderId = client.GenderId;
+                not.NoteText = note.NoteText;
+                not.NoteTitle = note.NoteTitle;
+                not.EditDate = note.EditDate;
+                not.NoteId= note.NoteId;
+                not.NoteTypeId= note.NoteTypeId;
+                not.ClientId = not.ClientId;
                 await _context.SaveChangesAsync();
+                return note;
             }
+            return null;
+        }
+
+        public async Task<Note> GetNoteById(int noteId)
+        {
+            return await _context.Notes.FirstOrDefaultAsync(x => x.NoteId == noteId);
         }
     }
 }
