@@ -1,10 +1,17 @@
-var builder = WebApplication.CreateBuilder(args);
+using DailyNotesWebApi.Models;
+using Microsoft.EntityFrameworkCore;
 
+var builder = WebApplication.CreateBuilder(args);
+var conString = builder.Configuration.GetConnectionString("DefaultConnection");
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddDbContext<DailyNotesContext>(options => 
+    options.UseSqlServer(conString));
+builder.Services.AddScoped<IDailyNotesRepository, DailyNotesRepository>();
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
