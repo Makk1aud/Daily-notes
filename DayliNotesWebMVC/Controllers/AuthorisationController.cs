@@ -29,8 +29,22 @@ namespace DayliNotesWebMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(Client client)
+        public IActionResult Login(string? login, string? password)
         {
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+            {
+                ViewBag.Error = "Поля пустые или пользователь не найден!";
+                return View();
+            }
+            Client client = new Client();
+            HttpResponseMessage response = _client.GetAsync(baseAddres + "/DailyNotes/GetClientByLogin/"+login).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;  
+                client = JsonConvert.DeserializeObject<Client>(data);
+                if (client.Password == password)
+                    return Ok("Вошел");
+            }
             return View();
         }
 
