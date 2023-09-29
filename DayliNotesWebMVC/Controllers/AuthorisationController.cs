@@ -1,15 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DailyNotesWebApi;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace DayliNotesWebMVC.Controllers
 {
     public class AuthorisationController : Controller
     {
         private readonly ILogger<AuthorisationController> _logger;
-
+        private readonly HttpClient _client;
+        public Uri baseAddres = new Uri("https://localhost:7210/api");
         public AuthorisationController(ILogger<AuthorisationController> logger)
         {
             _logger = logger;
+            _client = new HttpClient();
+            _client.BaseAddress = baseAddres;
         }
 
         public IActionResult About()
@@ -22,5 +27,18 @@ namespace DayliNotesWebMVC.Controllers
         {
             return View();
         }
+
+        //[HttpGet]
+        //public IActionResult Login()
+        //{
+        //    List<Client> clients = new List<Client>();
+        //    HttpResponseMessage response = _client.GetAsync(baseAddres + "/DailyNotes/GetClients").Result;
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        string data = response.Content.ReadAsStringAsync().Result;
+        //        clients = JsonConvert.DeserializeObject<List<Client>>(data);
+        //    }
+        //    return View(clients);
+        //}
     }
 }

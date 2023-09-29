@@ -1,9 +1,10 @@
-﻿@*
+﻿
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
-
+@model Client
 <style>
     .container {
         display: flex; 
@@ -31,7 +32,19 @@
         <div class="centered-div">
             <h1 class="text">Авторизация</h1>
             <form asp-action="Login" asp-controller="Authorisation" method="post">
-
+                <div class="centered-div">
+                    <p>
+                    <input asp-for="Login" placeholder="Login"/>
+                    <span asp-validation-for="Login"></span>
+                </p>
+                <p>
+                    <input type="password" name="Password" placeholder="Password" />
+                    <span asp-validation-for="Password"></span>
+                </p>
+                <p>
+                    <input type="submit" value="Войти" />
+                </p>
+                </div>
             </form>
         </div>
     </div>
