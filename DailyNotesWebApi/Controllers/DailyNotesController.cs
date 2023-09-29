@@ -1,6 +1,7 @@
 ﻿using DailyNotesWebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DailyNotesWebApi.Controllers
 {
@@ -107,6 +108,22 @@ namespace DailyNotesWebApi.Controllers
                 if (updNote == null) 
                     return NotFound();
                 return await _dailyNotesRepository.UpdateNote(updNote);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{clientLogin}")]
+        public async Task<ActionResult<Client>> GetClientByLogin(string clientLogin)
+        {
+            try
+            {
+                var client = _dailyNotesRepository.GetClientByLogin(clientLogin).Result;
+                if (client != null)
+                    return Ok(client);
+                return NotFound();
             }
             catch(Exception ex)
             {

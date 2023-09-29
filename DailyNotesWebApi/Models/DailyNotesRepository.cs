@@ -57,5 +57,10 @@ namespace DailyNotesWebApi.Models
         {
             return await _context.Notes.FirstOrDefaultAsync(x => x.NoteId == noteId);
         }
+
+        public async Task<Client> GetClientByLogin(string clientLogin)
+        {
+            return await _context.Clients.FirstOrDefaultAsync(x => x.Login == clientLogin);
+        }
     }
 }

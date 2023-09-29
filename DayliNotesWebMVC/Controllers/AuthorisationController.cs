@@ -28,6 +28,12 @@ namespace DayliNotesWebMVC.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Login(Client client)
+        {
+            return View();
+        }
+
         //[HttpGet]
         //public IActionResult Login()
         //{

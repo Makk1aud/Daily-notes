@@ -9,5 +9,6 @@
         public Task<Note> UpdateNote(Note note);
         public Task<Client> GetClientById(int clientId);
         public Task<Note> GetNoteById(int noteId);
+        public Task<Client> GetClientByLogin(string clientLogin);
     }
 }
