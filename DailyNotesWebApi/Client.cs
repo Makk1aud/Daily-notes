@@ -12,9 +12,9 @@ public partial class Client
 
     [Required(ErrorMessage = "Введите пароль!")]
     public string Password { get; set; } = null!;
-
+    [Required]
     public string Email { get; set; } = null!;
-
+    [Required]
     public int GenderId { get; set; }
 
     public virtual Gender ClientNavigation { get; set; } = null!;
