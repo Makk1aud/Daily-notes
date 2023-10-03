@@ -17,7 +17,7 @@ public partial class Client
     [Required]
     public int GenderId { get; set; }
 
-    public virtual Gender ClientNavigation { get; set; } = null!;
+    //public virtual Gender ClientNavigation { get; set; } = null;
 
-    public virtual ICollection<Note> Notes { get; set; } = new List<Note>();
+    public virtual ICollection<Note> Notes { get; set; } /*= new List<Note>();*/
 }

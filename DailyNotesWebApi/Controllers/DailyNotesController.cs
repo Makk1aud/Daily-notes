@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using DayliNotes.Core;
 
 namespace DailyNotesWebApi.Controllers
 {
@@ -32,19 +33,22 @@ namespace DailyNotesWebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Client>> CreateClient(Client client)
+        public async Task<ActionResult<Client>> CreateClient(ClientViewModel client)
         {
             try
             {
-                var result = await _dailyNotesRepository.GetClientById(client.ClientId);
-                if (result != null)
-                    return Ok(result);
-                return BadRequest();
+                //var result = await _dailyNotesRepository.GetClientById(client.ClientId);
+                if (client != null)
+                {
+                    await _dailyNotesRepository.CreateClient(client);
+                    return Ok(client);
+                }
+                return NotFound();
 
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -96,18 +100,17 @@ namespace DailyNotesWebApi.Controllers
             }
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult<Note>> UpdateNote(int id, Note note)
+        [HttpPut]
+        public async Task<ActionResult<Note>> UpdateNote(NoteViewModel note)
         {
             try
             {
-                if (id != note.NoteId)
-                    return BadRequest("Id must be equals!");
-
-                var updNote = await _dailyNotesRepository.GetNoteById(id);
+                if (note == null)
+                    return BadRequest("Note cant be null");
+                var updNote = await _dailyNotesRepository.GetNoteById(note.NoteId);
                 if (updNote == null) 
                     return NotFound();
-                return await _dailyNotesRepository.UpdateNote(updNote);
+                return await _dailyNotesRepository.UpdateNote(note);
             }
             catch(Exception ex)
             {

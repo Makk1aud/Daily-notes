@@ -1,5 +1,56 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
 }
+@model Client
+<style>
+    .container {
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 80vh; 
+    }
+
+    .centered-div {
+        justify-content: center; 
+        align-items: center;
+
+    }
+
+    html {
+        overflow: hidden;
+    }
+
+    .text{
+        color: #3CB371;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="centered-div">
+            <h1 class="text">Регистрация</h1>
+            <form asp-action="Registration" asp-controller="Authorisation" method="post">
+                <div class="centered-div">
+                <p>
+                    <input asp-for="Email" placeholder="Email"/>
+                    <span asp-validation-for="Email"></span>
+                </p>
+                <p>
+                    <input asp-for="Login" placeholder="Login"/>
+                    <span asp-validation-for="Login"></span>
+                </p>
+                <p>
+                    <input asp-for="Password" placeholder="Password"/>
+                    <span asp-validation-for="Password"></span>
+                </p>
+                <p>
+                    <input asp-for="GenderId" placeholder="Gender"/>
+                    <span asp-validation-for="GenderId"></span>
+                </p>
+                <p style="color: purple">@ViewBag.Error</p>
+                <p>
+                    <input type="submit" value="Войти" />
+                </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

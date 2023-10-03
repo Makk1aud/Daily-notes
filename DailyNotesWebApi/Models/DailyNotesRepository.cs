@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using DayliNotes.Core;
 
 namespace DailyNotesWebApi.Models
 {
@@ -9,9 +10,16 @@ namespace DailyNotesWebApi.Models
         {
             _context= context;
         }
-        public async Task<Client> CreateClient(Client client)
+        public async Task<Client> CreateClient(ClientViewModel client)
         {
-            var result = await _context.Clients.AddAsync(client);
+            var newClient = new Client()
+            {
+                Email = client.Email,
+                Password= client.Password,
+                GenderId= client.GenderId,
+                Login = client.Login
+            };
+            var result = await _context.Clients.AddAsync(newClient);
             await _context.SaveChangesAsync();
             return result.Entity;
         }
@@ -36,19 +44,19 @@ namespace DailyNotesWebApi.Models
             return await _context.Notes.Where(x => x.ClientId == clientId).ToListAsync();
         }
 
-        public async Task<Note> UpdateNote(Note note)
+        public async Task<Note> UpdateNote(NoteViewModel note)
         {
-            var not = await _context.Notes.FirstOrDefaultAsync(x => x.NoteId == note.NoteId);
-            if (not != null)
+            var updNote = await _context.Notes.FirstOrDefaultAsync(x => x.NoteId == note.NoteId);
+            if (updNote != null)
             {
-                not.NoteText = note.NoteText;
-                not.NoteTitle = note.NoteTitle;
-                not.EditDate = note.EditDate;
-                not.NoteId= note.NoteId;
-                not.NoteTypeId= note.NoteTypeId;
-                not.ClientId = not.ClientId;
+                updNote.NoteText = note.NoteText;
+                updNote.NoteTitle = note.NoteTitle;
+                updNote.EditDate = note.EditDate;
+                updNote.NoteId= note.NoteId;
+                updNote.NoteTypeId= note.NoteTypeId;
+                updNote.ClientId = note.ClientId;
                 await _context.SaveChangesAsync();
-                return note;
+                return updNote;
             }
             return null;
         }

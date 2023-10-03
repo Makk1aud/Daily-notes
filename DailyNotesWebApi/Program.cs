@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<DailyNotesContext>(options => 
     options.UseSqlServer(conString));
 builder.Services.AddScoped<IDailyNotesRepository, DailyNotesRepository>();
-
+builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace DayliNotesWebMVC.Controllers
 {
@@ -48,6 +49,25 @@ namespace DayliNotesWebMVC.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Registration()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Registration(Client client)
+        {
+            if(client == null)
+                return View();
+            string data = JsonConvert.SerializeObject(client);
+            StringContent content = new StringContent(data.ToLower(), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = _client.PostAsync(baseAddres + "/DailyNotes/CreateClient", content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
 
         //[HttpGet]
         //public IActionResult Login()
