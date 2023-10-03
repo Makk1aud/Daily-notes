@@ -35,9 +35,7 @@ public partial class DailyNotesContext : DbContext
 
             entity.ToTable("Client");
 
-            entity.Property(e => e.ClientId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("client_id");
+            entity.Property(e => e.ClientId).HasColumnName("client_id");
             entity.Property(e => e.Email)
                 .HasMaxLength(30)
                 .IsUnicode(false)
@@ -52,10 +50,10 @@ public partial class DailyNotesContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("password");
 
-            //entity.HasOne(d => d.ClientNavigation).WithOne(p => p.Client)
-            //    .HasForeignKey<Client>(d => d.ClientId)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("FK__Client__client_i__3B75D760");
+            entity.HasOne(d => d.Gender).WithMany(p => p.Clients)
+                .HasForeignKey(d => d.GenderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Client__client_i__3B75D760");
         });
 
         modelBuilder.Entity<Gender>(entity =>
@@ -91,10 +89,10 @@ public partial class DailyNotesContext : DbContext
                 .HasColumnName("note_title");
             entity.Property(e => e.NoteTypeId).HasColumnName("note_type_id");
 
-            //entity.HasOne(d => d.Client).WithMany(p => p.Notes)
-            //    .HasForeignKey(d => d.ClientId)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("FK__Note__note_title__3E52440B");
+            entity.HasOne(d => d.Client).WithMany(p => p.Notes)
+                .HasForeignKey(d => d.ClientId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Note__note_title__3E52440B");
 
             entity.HasOne(d => d.NoteType).WithMany(p => p.Notes)
                 .HasForeignKey(d => d.NoteTypeId)

@@ -18,7 +18,7 @@ create table Client
 	password varchar(30) not null,
 	email varchar(30) Not null,
 	gender_id int not null,
-	foreign key (client_id) references Gender(gender_id)
+	foreign key (gender_id) references Gender(gender_id)
 );
 
 create table Note

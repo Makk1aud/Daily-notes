@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
+using DayliNotes.Core;
 
 namespace DayliNotesWebMVC.Controllers
 {
@@ -55,7 +56,7 @@ namespace DayliNotesWebMVC.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Registration(Client client)
+        public async Task<IActionResult> Registration(ClientViewModel client)
         {
             if(client == null)
                 return View();

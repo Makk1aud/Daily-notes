@@ -48,7 +48,7 @@ namespace DailyNotesWebApi.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return BadRequest(ex.InnerException.Message);
             }
         }
 

@@ -9,5 +9,5 @@ public partial class Gender
 
     public string GenderTitle { get; set; } = null!;
 
-    public virtual Client? Client { get; set; }
+    public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
 }
