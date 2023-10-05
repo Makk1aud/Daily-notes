@@ -1,4 +1,27 @@
 ﻿
 @{
 }
-<h1>Notes</h1>
+@model List<Note>
+<style>
+    .container {
+        font-size: 0; 
+        border: 3px, solid, green;
+    }
+
+    .box {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        border: 2px solid green;
+    }
+    .box p {
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+    }
+</style>
+<div class="container">
+    @Html.BlockGenerate(Model)
+</div>
