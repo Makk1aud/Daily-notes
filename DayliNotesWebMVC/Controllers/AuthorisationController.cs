@@ -45,7 +45,7 @@ namespace DayliNotesWebMVC.Controllers
                 string data = response.Content.ReadAsStringAsync().Result;  
                 client = JsonConvert.DeserializeObject<Client>(data);
                 if (client.Password == password)
-                    return Ok("Вошел");
+                    return RedirectToAction("Notes", "Note", new { clientId = client.ClientId});
             }
             return View();
         }
