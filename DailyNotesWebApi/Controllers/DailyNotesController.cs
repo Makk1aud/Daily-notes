@@ -37,8 +37,8 @@ namespace DailyNotesWebApi.Controllers
         {
             try
             {
-                //var result = await _dailyNotesRepository.GetClientById(client.ClientId);
-                if (client != null)
+                var busyClient = await _dailyNotesRepository.GetClientByLogin(client.Login);
+                if (busyClient == null)
                 {
                     await _dailyNotesRepository.CreateClient(client);
                     return Ok(client);

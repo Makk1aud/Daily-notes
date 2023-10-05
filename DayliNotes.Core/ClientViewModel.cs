@@ -17,7 +17,6 @@ namespace DayliNotes.Core
         public string Password { get; set; } = null!;
         [Required]
         public string Email { get; set; } = null!;
-        [Required]
-        public int GenderId { get; set; }
+        public int GenderId { get; set; } = 3;
     }
 }
