@@ -2,26 +2,27 @@
 @{
 }
 @model List<Note>
-<style>
-    .container {
-        font-size: 0; 
-        border: 3px, solid, green;
-    }
 
-    .box {
-        display: inline-block;
-        width: 200px;
-        height: 200px;
-        margin-right: 10px;
-        margin-bottom: 10px;
-        border: 2px solid green;
-    }
-    .box p {
-      font-size: 16px;
-      color: #333;
-      text-align: center;
-    }
-</style>
-<div class="container">
-    @Html.BlockGenerate(Model)
+<link rel="stylesheet" href="~/css/NotesStyles.css" />
+
+<body>
+    <div class="container">
+        @Html.BlockGenerate(Model)
+    <div class="box">
+        <a class="plus" href="#openModal">Добавить заметку</a>
+    </div>
 </div>
+<div id="openModal" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Название</h3>
+        <a href="#close" title="Close" class="close">×</a>
+      </div>
+      <div class="modal-body">    
+        <p>Содержимое модального окна...</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
