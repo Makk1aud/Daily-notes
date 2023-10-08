@@ -44,5 +44,11 @@ namespace DayliNotesWebMVC.Controllers
             }
             return View(null);
         }
+
+        [HttpGet]
+        public IActionResult CreateNote()
+        {
+            return View();
+        }
     }
 }

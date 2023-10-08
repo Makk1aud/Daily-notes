@@ -4,43 +4,25 @@
 @model List<Note>
 
 <link rel="stylesheet" href="~/css/NotesStyles.css" />
-
+<script src="~/js/site.js"></script>
 <body>
+    <div class="top-panel">
+        <div class="top-panel-content">
+            <div style="position: relative;">
+                <form asp-action="Login" asp-controller="Authorisation" method="get">
+                    <input type="submit" value="Выйти из аккаунта" style="position: absolute; top: 0; right: 0;" />
+                </form>
+            </div>
+            <button class="top-panel-button" value="fldkgjfdk">Button</button>
+            <h1 style="color: white">lfkdgfd</h1>
+        </div>
+    </div>
+
     <div class="container">
         @Html.BlockGenerate(Model)
-    <div class="box">
-        <a class="plus" href="#openModal">Добавить заметку</a>
-    </div>
-<<<<<<< HEAD
-    </div>
-    @*Добавить форму на модальное окно для создания заметкиfd*@
-    <div id="openModal" class="modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Название</h3>
-            <a href="#close" title="Close" class="close">×</a>
-          </div>
-          <div class="modal-body">    
-            <p>Содержимое модального окна...</p>
-          </div>
+        <div class="box">
+            <a class="plus" href="/Note/CreateNote">Добавить заметку</a>
         </div>
-      </div>
     </div>
-=======
-</div>
-<div id="openModal" class="modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Название</h3>
-        <a href="#close" title="Close" class="close">×</a>
-      </div>
-      <div class="modal-body">    
-        <p>Содержимое модального окна...</p>
-      </div>
-    </div>
-  </div>
-</div>
->>>>>>> 124675cca13018f3c8cac1117b8cba6add4c3219
+    
 </body>
