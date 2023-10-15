@@ -14,10 +14,10 @@ namespace DailyNotesWebApi.Models
         {
             var newClient = new Client()
             {
-                Email = client.Email,
                 Password= client.Password,
                 GenderId= client.GenderId,
-                Login = client.Login
+                Login = client.Login,
+                Email = client.Email
             };
             var result = await _context.Clients.AddAsync(newClient);
             await _context.SaveChangesAsync();
@@ -52,7 +52,7 @@ namespace DailyNotesWebApi.Models
                 updNote.NoteText = note.NoteText;
                 updNote.NoteTitle = note.NoteTitle;
                 updNote.EditDate = note.EditDate;
-                updNote.NoteId= note.NoteId;
+                updNote.NoteId= (int)note.NoteId;
                 updNote.NoteTypeId= note.NoteTypeId;
                 updNote.ClientId = note.ClientId;
                 await _context.SaveChangesAsync();
@@ -69,6 +69,20 @@ namespace DailyNotesWebApi.Models
         public async Task<Client> GetClientByLogin(string clientLogin)
         {
             return await _context.Clients.FirstOrDefaultAsync(x => x.Login == clientLogin);
+        }
+        public async Task<Note> CreateNote(NoteViewModel note)
+        {
+                Note newNote = new Note()
+                {
+                    ClientId = note.ClientId,
+                    NoteTypeId = note.NoteTypeId,
+                    NoteTitle = note.NoteTitle,
+                    NoteText = note.NoteText,
+                    EditDate = note.EditDate
+                };
+                var result = await _context.Notes.AddAsync(newNote);
+                await _context.SaveChangesAsync();
+                return result.Entity;
         }
     }
 }

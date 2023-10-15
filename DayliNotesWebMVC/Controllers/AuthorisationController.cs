@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 using DayliNotes.Core;
+using DayliNotesWebMVC.Classes;
 
 namespace DayliNotesWebMVC.Controllers
 {
@@ -63,24 +64,13 @@ namespace DayliNotesWebMVC.Controllers
             string data = JsonConvert.SerializeObject(client);
             StringContent content = new StringContent(data.ToLower(), Encoding.UTF8, "application/json");
             HttpResponseMessage response = _client.PostAsync(baseAddres + "/DailyNotes/CreateClient", content).Result;
+            GetResponseNote.ResponseNote();
+            HttpResponseMessage response1 = _client.PostAsync(baseAddres + "/DailyNotes/GetSome", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Login");
             }
             return View();
         }
-
-        //[HttpGet]
-        //public IActionResult Login()
-        //{
-        //    List<Client> clients = new List<Client>();
-        //    HttpResponseMessage response = _client.GetAsync(baseAddres + "/DailyNotes/GetClients").Result;
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        string data = response.Content.ReadAsStringAsync().Result;
-        //        clients = JsonConvert.DeserializeObject<List<Client>>(data);
-        //    }
-        //    return View(clients);
-        //}
     }
 }

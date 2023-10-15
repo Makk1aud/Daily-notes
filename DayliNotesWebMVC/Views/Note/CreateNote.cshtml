@@ -1,4 +1,52 @@
 ﻿
 @{
 }
-<h1>Создание заметки</h1>
+
+<style>
+
+    .note {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+.note-title {
+  display: block;
+  width: 100%;
+  font-size: 24px;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px;
+}
+
+.note-content {
+  display: block;
+  width: 100%;
+  height: 600px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px;
+}
+
+.note-save {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #ccc;
+  border: none;
+  cursor: pointer;
+  
+}
+</style>
+
+<body>
+    <div class="note">
+        <form asp-action="CreateNote" asp-controller="Note" method="post">
+            <input type="text" name="NoteTitle" class="note-title" placeholder="Title">
+            <textarea class="note-content" name="NoteText" placeholder="Enter your note here"></textarea>
+            <input type="submit" class="note-save" value="Сохранить" />
+        </form>
+    </div>
+</body>

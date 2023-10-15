@@ -8,7 +8,7 @@ namespace DayliNotes.Core
 {
     public class NoteViewModel
     {
-        public int NoteId { get; set; }
+        public int? NoteId { get; set; } = 0;
 
         public int ClientId { get; set; }
 

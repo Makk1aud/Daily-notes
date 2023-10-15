@@ -9,7 +9,7 @@ namespace DayliNotes.Core
 {
     public class ClientViewModel
     {
-        //public int ClientId { get; set; }
+        public int ClientId { get; set; }
         [Required(ErrorMessage = "Введите имя пользователя!")]
         public string Login { get; set; } = null!;
 

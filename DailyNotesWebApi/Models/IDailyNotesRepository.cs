@@ -12,5 +12,6 @@ namespace DailyNotesWebApi.Models
         public Task<Client> GetClientById(int clientId);
         public Task<Note> GetNoteById(int noteId);
         public Task<Client> GetClientByLogin(string clientLogin);
+        public Task<Note> CreateNote(NoteViewModel note);
     }
 }

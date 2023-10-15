@@ -107,7 +107,7 @@ namespace DailyNotesWebApi.Controllers
             {
                 if (note == null)
                     return BadRequest("Note cant be null");
-                var updNote = await _dailyNotesRepository.GetNoteById(note.NoteId);
+                var updNote = await _dailyNotesRepository.GetNoteById((int)note.NoteId);
                 if (updNote == null) 
                     return NotFound();
                 return await _dailyNotesRepository.UpdateNote(note);
@@ -132,6 +132,29 @@ namespace DailyNotesWebApi.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        
+        [HttpPost]
+        public async Task<ActionResult<Note>> CreateNote(NoteViewModel note)
+        {
+            try
+            {
+                if (note == null)
+                    return BadRequest("Cant be Null");
+                await _dailyNotesRepository.CreateNote(note);
+                return Ok(note);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> GetSome(NoteViewModel noteViewModel)
+        {
+            return Ok(noteViewModel);
         }
     }
 }

@@ -28,17 +28,17 @@
         <div class="centered-div">
             <h1 class="text">Регистрация</h1>
             <form asp-action="Registration" asp-controller="Authorisation" method="post">
-                <div class="centered-div">
-                <p>
-                    <input asp-for="Email" placeholder="Email"/>
-                    <span asp-validation-for="Email"></span>
-                </p>
+                <div class="centered-div">  
                 <p>
                     <input asp-for="Login" placeholder="Login"/>
                     <span asp-validation-for="Login"></span>
                 </p>
                 <p>
-                    <input asp-for="Password" placeholder="Password"/>
+                    <input asp-for="Email" placeholder="Email"/>
+                    <span asp-validation-for="Email"></span>
+                </p>
+                <p>
+                    <input asp-for="Password" placeholder="Password" type="password"/>
                     <span asp-validation-for="Password"></span>
                 </p>
                 <p style="color: purple">@ViewBag.Error</p>
