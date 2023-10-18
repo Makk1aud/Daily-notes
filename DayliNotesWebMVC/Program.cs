@@ -25,4 +25,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Authorisation}/{action=About}");
 
+app.MapControllerRoute(
+    name: "default2",
+    pattern: "{controller=Note}/{action=Notes}/{clientId}");
+
 app.Run();

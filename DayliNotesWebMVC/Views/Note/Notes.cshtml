@@ -21,7 +21,7 @@
     <div class="container">
         @Html.BlockGenerate(Model)
         <div class="box">
-            <a class="plus" href="/Note/CreateNote">Добавить заметку</a>
+            <a class="plus" href="/Note/CreateNote?clientId=@ViewBag.ClientId">Добавить заметку</a>
         </div>
     </div>
     

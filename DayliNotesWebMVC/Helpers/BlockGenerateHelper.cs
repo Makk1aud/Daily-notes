@@ -19,6 +19,9 @@ namespace DayliNotesWebMVC.Helpers
                     $"<p>{note.NoteTitle}</p>\r\n    " +
                     $"<p>{noteText}</p>\r\n\r\n      " +
                     $"<p >{note.EditDate}</p>\r\n\r\n  " +
+                    $"<form method='get' action='UpdateNote' >" +
+                    $"<input type='number' name='noteId' hidden value='{note.NoteId}'/>" +
+                    $"<p><input type='submit' value='Редактировать'</p></form>" +
                     $"</div>";
                 noteText = string.Empty;
             }

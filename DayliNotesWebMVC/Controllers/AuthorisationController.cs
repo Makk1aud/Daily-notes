@@ -64,8 +64,7 @@ namespace DayliNotesWebMVC.Controllers
             string data = JsonConvert.SerializeObject(client);
             StringContent content = new StringContent(data.ToLower(), Encoding.UTF8, "application/json");
             HttpResponseMessage response = _client.PostAsync(baseAddres + "/DailyNotes/CreateClient", content).Result;
-            GetResponseNote.ResponseNote();
-            HttpResponseMessage response1 = _client.PostAsync(baseAddres + "/DailyNotes/GetSome", content).Result;
+            HttpResponseMessage response1 = _client.PostAsync(baseAddres + "/DailyNotes/CreateNote", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Login");

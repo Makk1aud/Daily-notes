@@ -40,12 +40,13 @@
   
 }
 </style>
-
+@model int
 <body>
     <div class="note">
         <form asp-action="CreateNote" asp-controller="Note" method="post">
             <input type="text" name="NoteTitle" class="note-title" placeholder="Title">
             <textarea class="note-content" name="NoteText" placeholder="Enter your note here"></textarea>
+            <input type="number" name="clientId" hidden value="@Model" />
             <input type="submit" class="note-save" value="Сохранить" />
         </form>
     </div>

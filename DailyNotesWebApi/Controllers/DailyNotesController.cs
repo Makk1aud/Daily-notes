@@ -134,7 +134,7 @@ namespace DailyNotesWebApi.Controllers
             }
         }
 
-        
+
         [HttpPost]
         public async Task<ActionResult<Note>> CreateNote(NoteViewModel note)
         {
@@ -147,14 +147,24 @@ namespace DailyNotesWebApi.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(ex.InnerException.Message);
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult> GetSome(NoteViewModel noteViewModel)
+        [HttpGet("{noteId:int}")]
+        public async Task<ActionResult<Note>> GetNoteById(int noteId)
         {
-            return Ok(noteViewModel);
+            try
+            {
+                var note = await _dailyNotesRepository.GetNoteById(noteId);
+                if(note == null)
+                    return NotFound();
+                return Ok(note);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
