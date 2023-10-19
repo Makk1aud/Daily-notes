@@ -84,5 +84,12 @@ namespace DailyNotesWebApi.Models
                 await _context.SaveChangesAsync();
                 return result.Entity;
         }
+
+        public async Task<Note> DeleteNote(Note note)
+        {
+            var result = _context.Notes.Remove(note);
+            await _context.SaveChangesAsync();
+            return result.Entity;
+        }
     }
 }

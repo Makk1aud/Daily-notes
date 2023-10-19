@@ -107,5 +107,16 @@ namespace DayliNotesWebMVC.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteNote(int noteId, int _clientId)
+        {
+            var response = await _client.DeleteAsync(baseAddres + "/DailyNotes/DeleteNote/" + noteId);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Notes", new { clientId = _clientId });
+            }
+            return NotFound();
+        }
     }
 }

@@ -166,5 +166,22 @@ namespace DailyNotesWebApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("{noteId:int}")]
+        public async Task<ActionResult<Note>> DeleteNote(int noteId)
+        {
+            try
+            {
+                var note = await _dailyNotesRepository.GetNoteById(noteId);
+                if(note == null)
+                    return NotFound();
+                await _dailyNotesRepository.DeleteNote(note);
+                return Ok(note);
+            }
+            catch ( Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
     }
 }

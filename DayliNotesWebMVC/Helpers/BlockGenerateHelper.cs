@@ -14,14 +14,18 @@ namespace DayliNotesWebMVC.Helpers
             foreach (Note note in listNotes)
             {
                 if (!string.IsNullOrEmpty(note.NoteText))
-                    noteText = note.NoteText.Length > maxLength ? note.NoteText.Substring(0, maxLength) : note.NoteText;
+                    noteText = note.NoteText.Length > maxLength ? note.NoteText.Substring(0, maxLength) + "..." : note.NoteText;
                 result += $"<div class=\"box\">\r\n    " +
                     $"<p>{note.NoteTitle}</p>\r\n    " +
                     $"<p>{noteText}</p>\r\n\r\n      " +
                     $"<p >{note.EditDate}</p>\r\n\r\n  " +
                     $"<form method='get' action='UpdateNote' >" +
                     $"<input type='number' name='noteId' hidden value='{note.NoteId}'/>" +
-                    $"<p><input type='submit' value='Редактировать'</p></form>" +
+                    $"<p><input type='submit' value='Редактировать'/></p></form>" +
+                    $"<form action='DeleteNote'>" +
+                    $"<input type='number' name='noteId' hidden value='{note.NoteId}'/>" +
+                    $"<input type='number' name='_clientId' hidden value='{note.ClientId}'/>" +
+                    $"<p><input type='submit' value='Удалить'/></p></form>" +
                     $"</div>";
                 noteText = string.Empty;
             }
