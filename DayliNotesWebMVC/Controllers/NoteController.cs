@@ -57,8 +57,8 @@ namespace DayliNotesWebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateNote(string? NoteText, string? NoteTitle, int clientId)
         {
-            //string data = JsonConvert.SerializeObject(viewModel);
-            //StringContent content = new StringContent(data.ToLower(), Encoding.UTF8, "application/json");
+            if (NoteText == null)
+                return View(clientId);
             HttpResponseMessage response = await _client.PostAsJsonAsync(baseAddres + "/DailyNotes/CreateNote", new NoteViewModel()
             {
                 ClientId = clientId,
@@ -105,7 +105,7 @@ namespace DayliNotesWebMVC.Controllers
             {
                 return RedirectToAction("Notes", new { clientId = note.ClientId });
             }
-            return View();
+            return View(note);
         }
 
         [HttpGet]

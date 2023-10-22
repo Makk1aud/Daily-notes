@@ -35,10 +35,7 @@ namespace DayliNotesWebMVC.Controllers
         public IActionResult Login(string? login, string? password)
         {
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
-            {
-                ViewBag.Error = "Поля пустые или пользователь не найден!";
                 return View();
-            }
             Client client = new Client();
             HttpResponseMessage response = _client.GetAsync(baseAddres + "/DailyNotes/GetClientByLogin/"+login).Result;
             if (response.IsSuccessStatusCode)
@@ -48,6 +45,8 @@ namespace DayliNotesWebMVC.Controllers
                 if (client.Password == password)
                     return RedirectToAction("Notes", "Note", new { clientId = client.ClientId});
             }
+            ViewBag.Error = "Неправильный логин или пароль";
+            ViewBag.Login = login;
             return View();
         }
 
@@ -61,10 +60,10 @@ namespace DayliNotesWebMVC.Controllers
         {
             if(client == null)
                 return View();
-            string data = JsonConvert.SerializeObject(client);
-            StringContent content = new StringContent(data.ToLower(), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = _client.PostAsync(baseAddres + "/DailyNotes/CreateClient", content).Result;
-            HttpResponseMessage response1 = _client.PostAsync(baseAddres + "/DailyNotes/CreateNote", content).Result;
+            //string data = JsonConvert.SerializeObject(client);
+            //StringContent content = new StringContent(data.ToLower(), Encoding.UTF8, "application/json");
+            //HttpResponseMessage response = _client.PostAsync(baseAddres + "/DailyNotes/CreateClient", content).Result;
+            HttpResponseMessage response = _client.PostAsJsonAsync(baseAddres + "/DailyNotes/CreateClient", client).Result;
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Login");

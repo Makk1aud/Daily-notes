@@ -50,5 +50,9 @@
             <textarea class="note-content" asp-for="NoteText" placeholder="Enter your note here"></textarea>
             <input type="submit" class="note-save" value="Сохранить" />
         </form>
+        <form asp-action="Notes" asp-controller="Note" asp-route-clientId="@Model.ClientId" method="get">
+            <input type="number" name="clientId" hidden value="@Model.ClientId" />
+            <input type="submit" class="note-save" value="Назад" />
+        </form>
     </div>
 </body>

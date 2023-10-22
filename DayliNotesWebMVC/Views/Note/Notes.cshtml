@@ -2,26 +2,91 @@
 @{
 }
 @model List<Note>
+<link rel="stylesheet" href="styles.css">
+<style>
+    .container {
+        font-size: 0;
+        border: 3px, solid, green;
+    }
 
-<link rel="stylesheet" href="~/css/NotesStyles.css?v1" />
-<script src="~/js/site.js"></script>
+    .box {
+      display: inline-block;
+      width: 210px;
+      height: 280px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      border: 2px solid green;
+      overflow: hidden;
+      border-radius: 10px;
+      background-image: linear-gradient(to top, rgba(green, 0.5), transparent);
+    }
+
+    .box p {
+        font-size: 16px;          
+        text-align: center;   
+    }
+    .noteText {
+        color: forestgreen;
+        height: 55px;
+    }
+    
+    .noteTitle {
+        color: lightgoldenrodyellow;
+        height: 30px;
+    }
+
+    .plus {
+        display: block;
+        width: 200px;
+        height: 200px;
+        background-color: black;
+        color: lightyellow;
+        font-size: 32px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .exit-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 20px;
+    }
+
+    .exit-button {
+        width: 150px;
+        font-size: 16px;
+        padding: 10px;
+        background-color: #ccc;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-new {
+    border-radius: 10px;
+    color: white;
+    transition: .2s linear;
+    background: forestgreen;
+    }
+
+    .btn-new:hover {
+        box-shadow: 0 0 0 2px green, 0 0 0 4px black;
+    }
+</style>
+
 <body>
-    <div class="top-panel">
-        <div class="top-panel-content">
-            <div style="position: relative;">
-                <form asp-action="Login" asp-controller="Authorisation" method="get">
-                    <input type="submit" value="Выйти из аккаунта" style="position: absolute; top: 0; right: 0;" />
-                </form>
-            </div>
-            <button class="top-panel-button" value="fldkgjfdk">Button</button>
-            <h1 style="color: white">lfkdgfd</h1>
-        </div>
+    <div class="exit-container">
+        <form asp-action="Login" asp-controller="Authorisation" method="get">
+            <input type="submit" value="Выйти из аккаунта" class="exit-button" />
+        </form>
     </div>
 
-    <div class="container">
+    <div class="container" >
         @Html.BlockGenerate(Model)
         <div class="box">
-            <a class="plus" href="/Note/CreateNote?clientId=@ViewBag.ClientId">Добавить заметку</a>
+            <p>
+                <a class="plus" style="height: 250px; padding-top: 65px" href="/Note/CreateNote?clientId=@ViewBag.ClientId">Добавить заметку</a>
+            </p>
         </div>
     </div>
     

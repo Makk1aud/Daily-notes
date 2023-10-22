@@ -49,5 +49,9 @@
             <input type="number" name="clientId" hidden value="@Model" />
             <input type="submit" class="note-save" value="Сохранить" />
         </form>
+        <form asp-action="Notes" asp-controller="Note" asp-route-clientId="@Model" method="get">
+            <input type="number" name="clientId" hidden value="@Model" />
+            <input type="submit" class="note-save" value="Назад" />
+        </form>
     </div>
 </body>
