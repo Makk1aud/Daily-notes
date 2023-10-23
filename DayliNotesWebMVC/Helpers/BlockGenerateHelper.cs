@@ -1,4 +1,5 @@
 ﻿using DailyNotesWebApi;
+using DayliNotes.Core;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -6,13 +7,13 @@ namespace DayliNotesWebMVC.Helpers
 {
     public static class BlockGenerateHelper
     {
-        public static HtmlString BlockGenerate(this IHtmlHelper html, List<Note> listNotes)
+        public static HtmlString BlockGenerate(this IHtmlHelper html, List<NoteViewModel> listNotes)
         {
             int maxLength = 60;
             string noteText = string.Empty; 
             string noteTitle = string.Empty;
             string result = string.Empty;
-            foreach (Note note in listNotes)
+            foreach (var note in listNotes)
             {
                 noteTitle = note.NoteTitle != null? note.NoteTitle : "Без названия";
                 if (!string.IsNullOrEmpty(note.NoteText))

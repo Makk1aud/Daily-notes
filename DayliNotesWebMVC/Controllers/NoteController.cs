@@ -30,18 +30,24 @@ namespace DayliNotesWebMVC.Controllers
             if(response.IsSuccessStatusCode)
             {
                 string data = await response.Content.ReadAsStringAsync();
+                JArray result = JArray.Parse(data);
+                var notes = result.ToObject<List<NoteViewModel>>();
+
+                //var listNotes = result["items"].Value<JArray>();
+                //List<NoteViewModel> notes = listNotes.ToObject<List<NoteViewModel>>();
 
 
-                var listNotes = JsonConvert.DeserializeObject(data);
-                List<Note> notes = ((JArray)listNotes).Select(x => new Note
-                {
-                    NoteId = (int)x["noteId"],
-                    ClientId = (int)x["clientId"],
-                    NoteTypeId = (int)x["noteTypeId"],
-                    NoteText = (string)x["noteText"],
-                    EditDate = (DateTime)x["editDate"],
-                    NoteTitle = (string)x["noteTitle"]
-                }).ToList();
+                //var listNotes = JsonConvert.DeserializeObject(data);
+                //var notes = ((JArray)listNotes).Select(x => new NoteViewModel
+                //{
+                //    NoteId = (int)x["noteId"],
+                //    ClientId = (int)x["ClientId"],
+                //    NoteTypeId = (int)x["noteTypeId"],
+                //    NoteText = (string)x["noteText"],
+                //    EditDate = (DateTime)x["editDate"],
+                //    NoteTitle = (string)x["noteTitle"]
+                //}).ToList();
+                
                 ViewBag.ClientId = clientId;
                 return View(notes);
             }
@@ -55,13 +61,13 @@ namespace DayliNotesWebMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateNote(string? NoteText, string? NoteTitle, int clientId)
+        public async Task<IActionResult> CreateNote(string? NoteText, string? NoteTitle, int ClientId)
         {
             if (NoteText == null)
-                return View(clientId);
+                return View(ClientId);
             HttpResponseMessage response = await _client.PostAsJsonAsync(baseAddres + "/DailyNotes/CreateNote", new NoteViewModel()
             {
-                ClientId = clientId,
+                ClientId = ClientId,
                 NoteTypeId = 1,
                 NoteText = NoteText,
                 EditDate = DateTime.Now,
@@ -69,9 +75,9 @@ namespace DayliNotesWebMVC.Controllers
             });
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Notes", new { clientId = clientId });
+                return RedirectToAction("Notes", new { clientId = ClientId });
             }
-            return View();
+            return View(ClientId);
         }
 
         [HttpGet]

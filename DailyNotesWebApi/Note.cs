@@ -17,7 +17,7 @@ public partial class Note
 
     public string? NoteTitle { get; set; }
 
-    public virtual Client Client { get; set; } = null!;
+    public virtual Client Client { get; set; } = null;
 
-    public virtual NoteType NoteType { get; set; } = null!;
+    public virtual NoteType NoteType { get; set; } = null;
 }
