@@ -31,5 +31,9 @@ create table Note
 	note_title varchar(30) Null
 	foreign key (client_id) references Client(client_id),
 	foreign key (note_type_id) references NoteType(note_type_id)
-
 );
+
+INSERT INTO NoteType (type_title) VALUES ('Заметка');
+INSERT INTO Gender (gender_title) VALUES ('Оно');
+INSERT INTO Gender (gender_title) VALUES ('Муж');
+INSERT INTO Gender (gender_title) VALUES ('Жен');
